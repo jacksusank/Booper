@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Button States</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% csrf_token %}
+<style>
+    /* CSS to style the buttons as green squares */
+
+    body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* Creates 4 columns of equal width */
+      gap: 20px; /* Spacing between buttons */
+      width: 400px; /* Width of the grid container */
+      height: 400px; /* Height of the grid container */
+    }
+    .grid-container button {
+    background-color: #21bd93; /* Green color */
+    border-radius: 50%; /* Circular */
+    border: none; /* Removes default button border */
+    padding: 20px; /* Padding around the button content */
+    color: transparent; /* Transparent text color */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    width: 90px; /* Width of each button */
+    height: 90px; /* Height of each button */
+    }
+
+    /* CSS for the booped class */
+    .booped {
+      background-color: #d14568 !important; /* Red color */
+    }
+
+    .not_booped {
+      background-color: #21bd93 !important; /* Green color */
+    }
+  
+</style>
+</head>
+<body>
+
+<!-- HTML buttons arranged in a 4x4 grid -->
+<div class="grid-container">
+    <button id="button1"></button>
+    <button id="button2"></button>
+    <button id="button3"></button>
+    <button id="button4"></button>
+    <button id="button5"></button>
+    <button id="button6"></button>
+    <button id="button7"></button>
+    <button id="button8"></button>
+    <button id="button9"></button>
+    <button id="button10"></button>
+    <button id="button11"></button>
+    <button id="button12"></button>
+    <button id="button13"></button>
+    <button id="button14"></button>
+    <button id="button15"></button>
+    <button id="button16"></button>
+</div>
+
+
+  <script>
+  // Function to get the CSRF token from the cookie
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+  // Function to establish SSE connection
+  function connectSSE() {
+    console.log("Entered connectSSE function");
+      var source = new EventSource('/sse/');
+      source.onmessage = function(event) {
+        console.log("The client recieved an SSE!!");
+        var data = JSON.parse(event.data);
+        console.log(data);
+        var button = $(`#button${data.id}`);
+        console.log(button);
+        if (button.length > 0) {
+          if (data.booped) {
+            button.addClass('booped');
+          } else {
+            button.removeClass('booped');
+          }
+        }
+        }
+      };
+      // Reconnect every 5 seconds
+      // setTimeout(connectSSE, 5000);
+    
+
+  $(document).ready(function() {
+    console.log("_______________Recieved an SSE!!");
+    // Initial SSE connection
+    connectSSE();
+  });
+
+
+
+  var buttons = document.querySelectorAll('.grid-container button');
+  buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      console.log("htmlhello");
+
+      // Send AJAX request to update button state
+      $.ajax({
+          url: '/update_button_state/',
+          type: 'POST',
+          headers: {
+          'X-CSRFToken': getCookie('csrftoken') // Include the CSRF token in the headers
+          },
+          data: {
+              'button_id': button.id.substring(6) // Extract button ID
+          },
+          success: function(response) {
+              if (response.status === 'success') {
+                  // Toggle booped class for clicked button
+                  $(`#button${button.id.substring(6)}`).toggleClass('booped');
+              } else {
+                  console.error(response.message);
+              }
+          },
+          error: function(xhr, errmsg, err) {
+              console.error(xhr.status + ": " + xhr.responseText);
+          }
+      });
+
+    });
+      
+  });
+  </script>
+  
+
+
+
+  </body>
+  </html>
