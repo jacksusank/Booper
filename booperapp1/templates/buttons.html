@@ -29,7 +29,6 @@
     border: none; /* Removes default button border */
     padding: 20px; /* Padding around the button content */
     color: transparent; /* Transparent text color */
-    font-size: 16px; /* Font size */
     cursor: pointer; /* Changes cursor to pointer on hover */
     width: 90px; /* Width of each button */
     height: 90px; /* Height of each button */
@@ -48,7 +47,7 @@
 </head>
 <body>
 
-<!-- HTML buttons arranged in a 4x4 grid -->
+<!-- Creating the buttons -->
 <div class="grid-container">
     <button id="button1"></button>
     <button id="button2"></button>
@@ -104,12 +103,11 @@
             button.removeClass('booped');
           }
         }
-        }
-      };
-      // Reconnect every 5 seconds
-      // setTimeout(connectSSE, 5000);
-    
+      }
+  };
 
+    
+  // Connect the SSE when the document has been made
   $(document).ready(function() {
     console.log("_______________Recieved an SSE!!");
     // Initial SSE connection
@@ -118,6 +116,7 @@
 
 
 
+  // Event handler for whenever a button is clicked
   var buttons = document.querySelectorAll('.grid-container button');
   buttons.forEach(function(button) {
     button.addEventListener('click', function() {
@@ -150,9 +149,5 @@
       
   });
   </script>
-  
-
-
-
   </body>
   </html>
