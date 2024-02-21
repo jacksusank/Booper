@@ -1,0 +1,15 @@
+In the terminal:
+python manage.py shell
+
+In the shell:
+from booperapp1.models import BoopBoard, Boop
+b = BoopBoard(rows=4, columns=4, name="Website BoopBoard")
+b.save()
+for r in range(4):
+    for c in range(4):
+        b.boop_set.create(row=r, column=c, booped=False, thisID=((4*r)+c+1))
+
+quit()
+
+In the terminal:
+python manage.py runserver

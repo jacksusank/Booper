@@ -26,7 +26,7 @@ class SSE(View):
         # justBoops = Boop.objects.all()
 
         # Retrieve data from the BoopBoard model
-        boop_board = BoopBoard.objects.first()  # Assuming there's only one BoopBoard object
+        boop_board = BoopBoard.objects.get(name="Website BoopBoard")  # Assuming there's only one BoopBoard object
         if boop_board:
             print("BoopBoard exists")
             serversBoops = boop_board.boop_set.all()
@@ -60,7 +60,7 @@ def update_button_state_view(request):
     if request.method == "POST":
         print("update_button_state_view")
         button_id = request.POST.get("button_id")
-        boop_board = BoopBoard.objects.first()  # The first (and only) BoopBoard object
+        boop_board = BoopBoard.objects.get(name="Website BoopBoard")  # The first (and only) BoopBoard object
         if boop_board:
             serversBoops = boop_board.boop_set.all()
             button = serversBoops.get(thisID=button_id)
