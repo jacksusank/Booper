@@ -21,3 +21,8 @@ If you prefer to run the project locally using Django, simply clone this reposit
 - JavaScript
   
 - CSS
+
+
+## Acknowledgements
+
+This project was inspired by Bo Lopker and the Totem team.
