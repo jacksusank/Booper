@@ -1,7 +1,14 @@
-In the terminal:
+Instructions to run the site locally:
+
+Activate your virtual environment
+
+
+In your virtual environment terminal type each line individually:
+python manage.py makemigrations
+python manage.py migrate
 python manage.py shell
 
-In the shell:
+In the shell (you can copy and paste this whole block):
 from booperapp1.models import BoopBoard, Boop
 b = BoopBoard(rows=4, columns=4, name="Website BoopBoard")
 b.save()
@@ -11,5 +18,19 @@ for r in range(4):
 
 quit()
 
-In the terminal:
+In your virtual environment terminal:
 python manage.py runserver
+
+# Should print something like this:
+
+(BooperEnvironment) (base) jacksusank@Jacks-MacBook-Pro-3 booper1 % python manage.py runserver     
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+February 22, 2024 - 23:41:03
+Django version 4.2.10, using settings 'booper1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+# Hold the command button and click on the underlined http link that it prints out and you're done
