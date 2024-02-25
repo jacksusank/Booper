@@ -86,9 +86,15 @@
     return cookieValue;
   }
 
+  var source;
   // Function to establish SSE connection
   function connectSSE() {
     console.log("Entered connectSSE function");
+    // setTimeout(function() {
+      // If theres a source opened, then close it.
+      // if (source){
+      //   source.close();
+      // }
       var source = new EventSource('/sse/');
       source.onmessage = function(event) {
         console.log("The client recieved an SSE!!");
@@ -96,14 +102,16 @@
         console.log(data);
         var button = $(`#button${data.id}`);
         console.log(button);
-        if (button.length > 0) {
-          if (data.booped) {
-            button.addClass('booped');
+        if (button.length > 0) { // If there is at least one button attribute...
+          if (data.booped) { // If the button is booped on the server-side...
+            button.addClass('booped'); // ...then boop it on the client-side.
           } else {
             button.removeClass('booped');
           }
         }
       }
+      // time.sleep(1);
+  // }, 1000);
   };
 
     
@@ -111,6 +119,7 @@
   $(document).ready(function() {
     console.log("_______________Recieved an SSE!!");
     // Initial SSE connection
+    // setInterval(connectSSE, 1000);
     connectSSE();
   });
 
@@ -120,7 +129,7 @@
   var buttons = document.querySelectorAll('.grid-container button');
   buttons.forEach(function(button) {
     button.addEventListener('click', function() {
-      console.log("htmlhello");
+      console.log("Button was clicked!");
 
       // Send AJAX request to update button state
       $.ajax({
@@ -144,7 +153,7 @@
               console.error(xhr.status + ": " + xhr.responseText);
           }
       });
-
+    
     });
       
   });
