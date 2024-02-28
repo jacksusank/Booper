@@ -25,4 +25,4 @@ If you prefer to run the project locally using Django, simply clone this reposit
 
 ## Acknowledgements
 
-This project was inspired by Bo Lopker and the Totem team.
+The idea for this project was created by Bo Lopker and the Totem team.
