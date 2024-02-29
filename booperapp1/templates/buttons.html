@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Booper</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-{% csrf_token %}
 <style>
     /* CSS to style the buttons as green squares */
 
@@ -86,22 +85,15 @@
     return cookieValue;
   }
 
-  var source;
   // Function to establish SSE connection
   function connectSSE() {
     console.log("Entered connectSSE function");
-    // setTimeout(function() {
-      // If theres a source opened, then close it.
-      // if (source){
-      //   source.close();
-      // }
+
       var source = new EventSource('/sse/');
       source.onmessage = function(event) {
-        console.log("The client recieved an SSE!!");
         var data = JSON.parse(event.data);
         console.log(data);
         var button = $(`#button${data.id}`);
-        console.log(button);
         if (button.length > 0) { // If there is at least one button attribute...
           if (data.booped) { // If the button is booped on the server-side...
             button.addClass('booped'); // ...then boop it on the client-side.
@@ -110,16 +102,12 @@
           }
         }
       }
-      // time.sleep(1);
-  // }, 1000);
   };
 
     
   // Connect the SSE when the document has been made
   $(document).ready(function() {
-    console.log("_______________Recieved an SSE!!");
-    // Initial SSE connection
-    // setInterval(connectSSE, 1000);
+    console.log("Recieved an SSE");
     connectSSE();
   });
 
@@ -145,6 +133,8 @@
               if (response.status === 'success') {
                   // Toggle booped class for clicked button
                   $(`#button${button.id.substring(6)}`).toggleClass('booped');
+                  console.log("Toggled button")
+
               } else {
                   console.error(response.message);
               }

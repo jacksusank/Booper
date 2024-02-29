@@ -1,14 +1,19 @@
 Instructions to run the site locally:
 
-Activate your virtual environment
+Activate and davigate into your virtual environment
 
 
-In your virtual environment terminal type each line individually:
+
+In your virtual environment terminal type each of these lines individually:
+pip install channels
+pip install daphne
 python manage.py makemigrations
 python manage.py migrate
 python manage.py shell
 
-In the shell (you can copy and paste this whole block):
+
+
+In the shell, copy and paste this whole block:
 from booperapp1.models import BoopBoard, Boop
 b = BoopBoard(rows=4, columns=4, name="Website BoopBoard")
 b.save()
@@ -18,19 +23,15 @@ for r in range(4):
 
 quit()
 
-In your virtual environment terminal:
-python manage.py runserver
 
-# Should print something like this:
 
-(BooperEnvironment) (base) jacksusank@Jacks-MacBook-Pro-3 booper1 % python manage.py runserver     
-Watching for file changes with StatReloader
-Performing system checks...
+In your virtual environment terminal type this line:
 
-System check identified no issues (0 silenced).
-February 22, 2024 - 23:41:03
-Django version 4.2.10, using settings 'booper1.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
+daphne booper1.asgi:application
 
-# Hold the command button and click on the underlined http link that it prints out and you're done
+
+# This should print something like this:
+2024-02-29 07:17:41,801 INFO     Starting server at tcp:port=8000:interface=127.0.0.1
+2024-02-29 07:17:41,802 INFO     HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+2024-02-29 07:17:41,802 INFO     Configuring endpoint tcp:port=8000:interface=127.0.0.1
+2024-02-29 07:17:41,802 INFO     Listening on TCP address 127.0.0.1:8000
