@@ -20,6 +20,7 @@ If you'd like to run this project locally using Django, clone this repository an
   
 - CSS
 
+## Images:
 
 ![BooperStart](https://github.com/jacksusank/Booper/assets/146315713/4b8a779a-d625-464b-8b1e-02b4412424cc)
 
