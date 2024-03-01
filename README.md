@@ -6,8 +6,9 @@ Upon visiting the site, users are presented with a 4x4 grid of interactive butto
 
 If you'd like to run this project locally using Django, clone this repository and set up Django within your virtual environment. Refer to the instructions provided in the `shellCommands.txt` file within the `booperapp1` directory.
 
+
 ## Systems:
-- Django
+- Django^*
 
 - PythonAnywhere
 
