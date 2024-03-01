@@ -8,18 +8,32 @@ If you'd like to run this project locally using Django, clone this repository an
 
 
 ## Systems:
-- Django^*
+- Django *
 
-- PythonAnywhere
+- PythonAnywhere *
+
+
+## Database Management:
+- SQLite *
+
 
 ## Languages:
 - Python
   
-- HTML
+- HTML *
   
-- JavaScript
+- JavaScript *
   
-- CSS
+- CSS *
+  
+
+## Communication Protocols:
+- Server-Sent Events (SSEs) *
+
+
+
+
+* Indicates that this was my first experience using the tool
 
 ## Images:
 
