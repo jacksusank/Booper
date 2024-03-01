@@ -132,8 +132,8 @@
           success: function(response) {
               if (response.status === 'success') {
                   // Toggle booped class for clicked button
-                  $(`#button${button.id.substring(6)}`).toggleClass('booped');
-                  console.log("Toggled button")
+                  // $(`#button${button.id.substring(6)}`).toggleClass('booped');
+                  console.log("Didn't toggle button")
 
               } else {
                   console.error(response.message);
